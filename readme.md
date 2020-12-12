@@ -10,7 +10,7 @@ To install the package, run the following command in your project directory:
 composer require mlab817/lighthouse-graphql-permission
 ```
 
-The command will also install the dependencies of the package: spatie/laravel-permission and nuwave/lighthouse.
+The command will also install the dependencies of the package: `spatie/laravel-permission` and `nuwave/lighthouse`.
 
 ## Set up
 
