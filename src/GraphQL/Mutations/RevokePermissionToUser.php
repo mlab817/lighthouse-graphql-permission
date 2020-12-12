@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlab817\LighthouseGraphQLLaravelPermission\GraphQL\Mutations;
+namespace Mlab817\LighthouseGraphQLPermission\GraphQL\Mutations;
 
 use App\Models\User;
-use Mlab817\LighthouseGraphQLLaravelPermission\Traits\DefaultGuard;
+use Mlab817\LighthouseGraphQLPermission\Traits\DefaultGuard;
 
 class RevokePermissionToUser
 {

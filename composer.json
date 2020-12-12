@@ -17,7 +17,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Mlab817\\LighthouseGraphQLLaravelPermission\\": "src/"
+            "Mlab817\\LighthouseGraphQLPermission\\": "src/"
         }
     },
     "minimum-stability": "dev",
@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mlab817\\LighthouseGraphQLLaravelPermission\\Providers\\LighthouseGraphQLLaravelPermissionServiceProvider"
+                "Mlab817\\LighthouseGraphQLPermission\\Providers\\LighthouseGraphQLPermissionServiceProvider"
             ]
         }
     }

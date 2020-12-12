@@ -1,8 +1,8 @@
 <?php
 
-namespace Mlab817\LighthouseGraphQLLaravelPermission\GraphQL\Mutations;
+namespace Mlab817\LighthouseGraphQLPermission\GraphQL\Mutations;
 
-use Mlab817\LighthouseGraphQLLaravelPermission\Traits\DefaultGuard;
+use Mlab817\LighthouseGraphQLPermission\Traits\DefaultGuard;
 use Spatie\Permission\Models\Permission;
 
 class CreatePermission
@@ -10,8 +10,9 @@ class CreatePermission
     use DefaultGuard;
 
     /**
-     * @param  null  $_
-     * @param  array<string, mixed>  $args
+     * @param null $_
+     * @param array<string, mixed> $args
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
     public function __invoke($_, array $args)
     {

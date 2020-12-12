@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlab817\LighthouseGraphQLLaravelPermission\Providers;
+namespace Mlab817\LighthouseGraphQLPermission\Providers;
 
 use GraphQL\Utils\BuildSchema;
 use Illuminate\Support\ServiceProvider;
@@ -20,8 +20,8 @@ class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
         app('events')->listen(
             BuildSchemaString::class,
             function (): string {
-                if (config('lighthouse-graphql-laravel-permission.schema')) {
-                    return file_get_contents(config('lighthouse-graphql-laravel-permission.schema'));
+                if (config('lighthouse-graphql-permission.schema')) {
+                    return file_get_contents(config('lighthouse-graphql-permission.schema'));
                 }
 
                 return file_get_contents(__DIR__.'/../../graphql/permission.graphql');
@@ -48,16 +48,16 @@ class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(
             __DIR__.'/../../config/config.php',
-            'lighthouse-graphql-laravel-permission'
+            'lighthouse-graphql-permission'
         );
 
         $this->publishes([
-            __DIR__.'/../../config/config.php' => config_path('lighthouse-graphql-laravel-permission.php'),
+            __DIR__.'/../../config/config.php' => config_path('lighthouse-graphql-permission.php'),
         ], 'config');
 
         $this->publishes([
             __DIR__.'/../../graphql/permission.graphql' => base_path('graphql/permission.graphql'),
-        ], 'lighthouse-graphql-laravel-permission-schema');
+        ], 'lighthouse-graphql-permission-schema');
 
     }
 }

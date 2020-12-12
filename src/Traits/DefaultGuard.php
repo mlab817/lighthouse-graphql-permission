@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlab817\LighthouseGraphQLLaravelPermission\Traits;
+namespace Mlab817\LighthouseGraphQLPermission\Traits;
 
 trait DefaultGuard
 {
@@ -8,6 +8,6 @@ trait DefaultGuard
 
     public function __construct()
     {
-        $this->guard = config('lighthouse-graphql-laravel-permission.guard');
+        $this->guard = config('lighthouse-graphql-permission.guard');
     }
 }
