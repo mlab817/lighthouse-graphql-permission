@@ -1,5 +1,5 @@
 {
-    "name": "mlab817/lighthouse-graphql-laravel-permission",
+    "name": "mlab817/lighthouse-graphql-permission",
     "description": "Add GraphQL types and mutations for spatie/laravel-permission",
     "type": "library",
     "keywords": ["laravel","lighthouse","GraphQL","spatie","laravel-permission"],
