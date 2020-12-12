@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["laravel","lighthouse","GraphQL","spatie","laravel-permission"],
     "require": {
-        "php": ">7.3.*",
+        "php": "^7.3|^8.0",
         "spatie/laravel-permission": "^4.18",
         "nuwave/lighthouse": "^3.18"
     },
@@ -16,7 +16,7 @@
         }
     ],
     "autoload": {
-        "ps-4": {
+        "psr-4": {
             "Mlab817\\LighthouseGraphQLLaravelPermission\\": "src/"
         }
     },
