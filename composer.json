@@ -1,0 +1,32 @@
+{
+    "name": "mlab817/lighthouse-graphql-laravel-permission",
+    "description": "Add GraphQL types and mutations for spatie/laravel-permission",
+    "type": "library",
+    "keywords": ["laravel","lighthouse","GraphQL","spatie","laravel-permission"],
+    "require": {
+        "php": ">7.3.*",
+        "spatie/laravel-permission": "^4.18",
+        "nuwave/lighthouse": "^3.18"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mark Lester A. Bolotaolo",
+            "email": "mlab817@gmail.com"
+        }
+    ],
+    "autoload": {
+        "ps-4": {
+            "Mlab817\\LighthouseGraphQLLaravelPermission\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mlab817\\LighthouseGraphQLLaravelPermission\\Providers\\LighthouseGraphQLLaravelPermissionServiceProvider"
+            ]
+        }
+    }
+}

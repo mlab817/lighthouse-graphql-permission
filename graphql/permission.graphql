@@ -1,0 +1,84 @@
+type Permission {
+    id: ID
+    name: String
+    guard_name: String
+}
+
+type Role {
+    id: ID
+    name: String
+    guard_name: String
+}
+
+input GivePermissionToUserInput {
+    user_id: ID!
+    permission: String!
+}
+
+input AssignRoleInput {
+    user_id: ID!
+    role: String!
+}
+
+input RemoveRoleInput {
+    user_id: ID!
+    role: String!
+}
+
+input GivePermissionToRoleInput {
+    role: String!
+    permission: String!
+}
+
+input RevokePermissionToUserInput {
+    user_id: ID!
+    permission: String!
+}
+
+input RevokePermissionToRoleInput {
+    role: String!
+    permission: String!
+}
+
+input CreateRoleInput {
+    name: String!
+}
+input CreatePermissionInput {
+    name: String!
+}
+
+extend type User {
+    permissions: [Permission] @belongsToMany
+    roles: [Role] @belongsToMany
+}
+
+extend type Query {
+    permissions: [Permission] @all(model:"Spatie\\Permission\\Models\\Permission")
+    roles: [Role] @all(model:"Spatie\\Permission\\Models\\Role")
+}
+
+extend type Mutation {
+    "Create a new role"
+    createRole(input: CreateRoleInput! @spread): Role! @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\CreateRole")
+
+    "Create a new permission"
+    createPermission(input: CreatePermissionInput! @spread): Permission! @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\CreatePermission")
+
+    "Assign a role to user"
+    assignRole(input: AssignRoleInput! @spread): User! @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\AssignRole")
+
+    "Assign a role to user"
+    removeRole(input: RemoveRoleInput! @spread): User! @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\RemoveRole")
+
+    "Give permission to user"
+    givePermissionToUser(input: GivePermissionToUserInput! @spread): String @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\GivePermissionToUser")
+
+    "Giver permission to role"
+    givePermissionToRole(input: GivePermissionToRoleInput! @spread): String @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\GivePermissionToRole")
+
+    "Revoke permission from user"
+    revokePermissionToUser(input: RevokePermissionToUserInput! @spread): String @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\RevokePermissionToUser")
+
+    "Revoke permission from role"
+    revokePermissionToRole(input: RevokePermissionToRoleInput! @spread): String @field(resolver: "Mlab817\\LighthouseGraphQLLaravelPermission\\GraphQL\\Mutations\\RevokePermissionToRole")
+}
