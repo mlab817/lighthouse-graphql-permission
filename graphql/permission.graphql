@@ -57,7 +57,7 @@ extend type Query {
     roles: [Role] @all(model:"Spatie\\Permission\\Models\\Role")
 }
 
-extend type Mutation @guard(with: ["api"]) @restrict {
+extend type Mutation @restrict {
     "Create a new role"
     createRole(input: CreateRoleInput! @spread): Role! @field(resolver: "Mlab817\\LighthouseGraphQLPermission\\GraphQL\\Mutations\\CreateRole")
 
