@@ -17,7 +17,7 @@ class AssignRole
      */
     public function __invoke($_, array $args)
     {
-        $user = User::findOrFail($args['id']);
+        $user = User::findOrFail($args['user_id']);
 
         $role = Role::findByName($args['role'], $this->guard);
 
