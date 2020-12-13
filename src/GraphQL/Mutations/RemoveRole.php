@@ -19,7 +19,7 @@ class RemoveRole
     {
         $user = User::findOrFail($args['user_id']);
 
-        $role = Role::findByName($args['role']);
+        $role = Role::findByName($args['role'], $this->guard);
 
         $user->removeRole($role);
 
