@@ -5,6 +5,7 @@ namespace Mlab817\LighthouseGraphQLPermission\GraphQL\Directives;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Log;
 use Nuwave\Lighthouse\Exceptions\AuthorizationException;
 use Nuwave\Lighthouse\Schema\Directives\BaseDirective;
 use Nuwave\Lighthouse\Schema\Values\FieldValue;
@@ -39,7 +40,10 @@ SDL;
                 function ($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo) use ($originalResolver) {
                     // if a role restriction is defined
                     // check if user has role
+                    Log::debug('set resolver is running');
+
                     if (config('lighthouse-graphql-permission.restrict.role')) {
+                        Log::debug('role is required');
 
                         $role = config('lighthouse-graphql-permission.restrict.role');
 
@@ -53,6 +57,8 @@ SDL;
                             throw new AuthorizationException('Admin role is required');
                         }
                     }
+
+                    Log::debug('role is not required');
 
                     return $originalResolver($root, $args, $context, $resolveInfo);
                 }
