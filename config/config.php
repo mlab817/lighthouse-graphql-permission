@@ -16,4 +16,8 @@ return [
     'restrict' => [
         'role' => env('PERMISSION_RESTRICT_MUTATIONS','admin')
     ],
+
+    'users' => [
+        'table' => 'users'
+    ],
 ];

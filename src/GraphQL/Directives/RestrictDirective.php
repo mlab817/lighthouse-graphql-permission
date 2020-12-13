@@ -25,7 +25,7 @@ class RestrictDirective extends BaseDirective implements FieldMiddleware, Define
 """
 Restrict access of permission mutations based on role defined in config
 """
-directive @restrict on FIELD_DEFINITION | OBJECT
+directive @restrict on FIELD_DEFINITION
 SDL;
 
     }

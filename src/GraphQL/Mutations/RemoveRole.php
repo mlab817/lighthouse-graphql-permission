@@ -2,7 +2,7 @@
 
 namespace Mlab817\LighthouseGraphQLPermission\GraphQL\Mutations;
 
-use App\Models\User;
+use Mla817\LighthouseGraphQLPermission\Factories\User;
 use Mlab817\LighthouseGraphQLPermission\Traits\DefaultGuard;
 use Spatie\Permission\Models\Role;
 
@@ -18,6 +18,7 @@ class RemoveRole
     public function __invoke($_, array $args)
     {
         $user = User::findOrFail($args['user_id']);
+
         $role = Role::findByName($args['role'], $this->guard);
 
         $user->removeRole($role);
