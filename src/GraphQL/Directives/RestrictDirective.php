@@ -3,19 +3,14 @@
 namespace Mlab817\LighthouseGraphQLPermission\GraphQL\Directives;
 
 use Closure;
-use GraphQL\Language\AST\TypeDefinitionNode;
-use GraphQL\Language\AST\TypeExtensionNode;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Auth\AuthenticationException;
 use Nuwave\Lighthouse\Exceptions\AuthorizationException;
-use Nuwave\Lighthouse\Schema\AST\ASTHelper;
-use Nuwave\Lighthouse\Schema\AST\DocumentAST;
 use Nuwave\Lighthouse\Schema\Directives\BaseDirective;
 use Nuwave\Lighthouse\Schema\Values\FieldValue;
 use Nuwave\Lighthouse\Support\Contracts\DefinedDirective;
 use Nuwave\Lighthouse\Support\Contracts\FieldMiddleware;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
-use Nuwave\Lighthouse\Support\Contracts\TypeExtensionManipulator;
 
 class RestrictDirective extends BaseDirective implements FieldMiddleware, DefinedDirective
 {
@@ -44,19 +39,19 @@ SDL;
                 function ($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo) use ($originalResolver) {
                     // if a role restriction is defined
                     // check if user has role
-                    if (config('permission.restrict.role')) {
-                        $role = config('permission.restrict.role');
+                    if (config('lighthouse-graphql-permission.restrict.role')) {
+
+                        $role = config('lighthouse-graphql-permission.restrict.role');
+
                         $user = $context->user();
 
-                        if (!$user) {
+                        if (! $user) {
                             throw new AuthenticationException('You must be logged in to continue');
                         }
 
-                        if (!$user->hasRole($role)) {
+                        if (! $user->hasRole($role)) {
                             throw new AuthorizationException('Admin role is required');
                         }
-
-                        return $originalResolver($root, $args, $context, $resolveInfo);
                     }
 
                     return $originalResolver($root, $args, $context, $resolveInfo);
@@ -66,13 +61,4 @@ SDL;
 
     }
 
-    public function manipulateTypeDefinition(DocumentAST &$documentAST, TypeDefinitionNode &$typeDefinition): void
-    {
-        ASTHelper::addDirectiveToFields($this->directiveNode, $typeDefinition);
-    }
-
-    public function manipulateTypeExtension(DocumentAST &$documentAST, TypeExtensionNode &$typeExtension): void
-    {
-        ASTHelper::addDirectiveToFields($this->directiveNode, $typeExtension);
-    }
 }
