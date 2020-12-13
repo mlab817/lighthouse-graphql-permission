@@ -18,6 +18,6 @@ return [
     ],
 
     'users' => [
-        'table' => 'users'
+        'table' => env('LIGHTHOUSE_GRAPHQL_PERMISSION_USERS_TABLE', 'users'),
     ],
 ];
