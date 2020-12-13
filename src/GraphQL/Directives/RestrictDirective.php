@@ -46,7 +46,7 @@ SDL;
                     throw new AuthenticationException('You must be logged in to continue');
                 }
 
-                if (! $user->hasRole('admin')) {
+                if (! $user->hasRole($role)) {
                     throw new AuthorizationException('Admin role is required');
                 }
 
