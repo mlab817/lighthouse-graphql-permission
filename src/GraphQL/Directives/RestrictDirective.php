@@ -33,6 +33,8 @@ SDL;
 
     public function handleField(FieldValue $fieldValue, Closure $next): FieldValue
     {
+        Log::debug('restrict directive running');
+
         $originalResolver = $fieldValue->getResolver();
 
         return $next(

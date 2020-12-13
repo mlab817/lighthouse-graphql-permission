@@ -8,4 +8,6 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Model
 {
     use HasRoles;
+
+    protected $guard_name = 'api';
 }
