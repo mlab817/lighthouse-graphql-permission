@@ -2,12 +2,9 @@
 
 namespace Mlab817\LighthouseGraphQLPermission\Providers;
 
-use GraphQL\Utils\BuildSchema;
 use Illuminate\Support\ServiceProvider;
-use Mlab817\LighthouseGraphQLPermission\GraphQL\Directives\RestrictDirective;
 use Nuwave\Lighthouse\Events\BuildSchemaString;
 use Nuwave\Lighthouse\Events\RegisterDirectiveNamespaces;
-use Nuwave\Lighthouse\Schema\Factories\DirectiveFactory;
 
 class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
 {
@@ -22,10 +19,6 @@ class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
 
         app('events')->listen(
             BuildSchemaString::class,
-            RegisterDirectiveNamespaces::class,
-            function () {
-              return ['Mlab817\\LighthouseGraphQLPermission\\GraphQL\\Directives'];
-            },
             function (): string {
                 if (config('lighthouse-graphql-permission.schema')) {
                     return file_get_contents(config('lighthouse-graphql-permission.schema'));
@@ -33,6 +26,13 @@ class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
 
                 return file_get_contents(__DIR__.'/../../graphql/permission.graphql');
             }
+        );
+
+        app('events')->listen(
+            RegisterDirectiveNamespaces::class,
+            function () {
+                return ['Mlab817\\LighthouseGraphQLPermission\\GraphQL\\Directives'];
+            },
         );
     }
 
