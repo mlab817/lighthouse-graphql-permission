@@ -5,6 +5,7 @@ namespace Mlab817\LighthouseGraphQLPermission\Providers;
 use GraphQL\Utils\BuildSchema;
 use Illuminate\Support\ServiceProvider;
 use Nuwave\Lighthouse\Events\BuildSchemaString;
+use Nuwave\Lighthouse\Events\RegisterDirectiveNamespaces;
 
 class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class LighthouseGraphQLPermissionServiceProvider extends ServiceProvider
 
         app('events')->listen(
             BuildSchemaString::class,
+            RegisterDirectiveNamespaces::class,
             function (): string {
                 if (config('lighthouse-graphql-permission.schema')) {
                     return file_get_contents(config('lighthouse-graphql-permission.schema'));
