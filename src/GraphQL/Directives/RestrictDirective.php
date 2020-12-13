@@ -17,11 +17,21 @@ use Nuwave\Lighthouse\Support\Contracts\TypeExtensionManipulator;
 
 class RestrictDirective extends BaseDirective implements FieldMiddleware, TypeExtensionManipulator
 {
+    /**
+     * The name of the directive
+     *
+     * @return string
+     */
     public function name(): string
     {
         return 'restrict';
     }
 
+    /**
+     * The definition of the directive
+     *
+     * @return string
+     */
     public static function definition(): string
     {
         return /** GraphQL */ <<<'SDL'
@@ -29,6 +39,13 @@ directive @restrict on FIELD_DEFINITION | OBJECT
 SDL;
     }
 
+    /**
+     * Take in field value and return value
+     *
+     * @param FieldValue $fieldValue
+     * @param Closure $next
+     * @return FieldValue
+     */
     public function handleField(FieldValue $fieldValue, Closure $next): FieldValue
     {
         $resolver = $fieldValue->getResolver();
@@ -42,10 +59,12 @@ SDL;
                 $role = config('permission.restrict.role');
                 $user = $context->user();
 
+                // if the user is not logged in throw authentication exception
                 if (! $user) {
                     throw new AuthenticationException('You must be logged in to continue');
                 }
 
+                // if user has no role admin
                 if (! $user->hasRole($role)) {
                     throw new AuthorizationException('Admin role is required');
                 }
@@ -58,7 +77,7 @@ SDL;
 
     }
 
-    public function manipulateTypeExtension(DocumentAST &$documentAST, TypeExtensionNode &$typeExtension)
+    public function manipulateTypeExtension(DocumentAST &$documentAST, TypeExtensionNode &$typeExtension): void
     {
         ASTHelper::addDirectiveToFields(
             $this->directiveNode,
