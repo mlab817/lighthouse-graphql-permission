@@ -2,7 +2,7 @@
 
 namespace Mlab817\LighthouseGraphQLPermission\GraphQL\Mutations;
 
-use Mlab817\LighthouseGraphQLPermission\Factories\User;
+use App\User;
 use Mlab817\LighthouseGraphQLPermission\Traits\DefaultGuard;
 use Spatie\Permission\Models\Role;
 
