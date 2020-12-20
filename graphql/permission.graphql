@@ -50,6 +50,10 @@ input CreatePermissionInput {
 extend type User {
     permissions: [Permission] @belongsToMany
     roles: [Role] @belongsToMany
+
+    all_permissions: [Permission]
+    direct_permissions: [Permission]
+    role_permissions: [Permission]
 }
 
 extend type Query {
